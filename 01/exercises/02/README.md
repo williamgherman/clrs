@@ -24,7 +24,7 @@ Therefore, insertion sort beats merge sort for inputs of size 43 or fewer.
 
 What is the smallest value of *n* such that an algorithm whose running time is
 100*n*<sup>2</sup> runs faster than an algorithm whose running time is
-2<sup>*n*<sup> on the same machine?
+2<sup>*n*</sup> on the same machine?
 
 ### Solution
 
