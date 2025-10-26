@@ -1,5 +1,5 @@
 # clrs
-My solutions to the exercises in "Introduction to Algorithms", third edition, by
+My solutions to the exercises in "Introduction to Algorithms", fourth edition, by
 Cormen, Lieserson, Rivest and Stein (also known as CLRS).
 
 <p align="center">
