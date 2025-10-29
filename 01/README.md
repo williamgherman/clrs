@@ -93,9 +93,9 @@ Therefore, insertion sort beats merge sort for inputs of size 43 or fewer.
 > machine?
 
 
-The smallest positive integer value solution to the inequality $100n^2$ \lt
-2^n$ is 15, which is therefore the smallest value of $n$ that would run faster
-on the $100n^2$ algorithm.
+The smallest positive integer value solution to the inequality $100n^2 < 2^n$
+is 15, which is therefore the smallest value of $n$ that would run faster on
+the $100n^2$ algorithm.
 
 # Problems
 
