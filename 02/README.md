@@ -4,10 +4,11 @@
 
 ### 2.1-1
 
-Using Figure 2.2 as a model, illustrate the operation of $\text{Insertion-Sort} on
-an array initially containing the sequence «31, 41, 59, 26, 41, 58».
 
-#### Solution
+> Using Figure 2.2 as a model, illustrate the operation of
+> $\text{Insertion-Sort}$ on an array initially containing the sequence
+> $\langle 31, 41, 59, 26, 41, 58 \rangle$.
+
 
 ```
 [31, 41, 59, 26, 41, 58]
@@ -36,44 +37,42 @@ an array initially containing the sequence «31, 41, 59, 26, 41, 58».
 
 ### 2.1-2
 
-Consider the procedure **Sum-Array** on the facing page. It computes the sum of
-the *n* numberes in array *A*[1:*n*]. State a loop invariant for this
-procedure, and use its initialization, maintenance, and termination properties
-to show that the **Sum-Array** procedure returns the sum of the numbers in
-*A*[1:*n*].
-
-**Sum-Array**(*A*, *n*):
-
-```
-1   sum = 0
-2   for i = 1 to n
-3       sum = sum + A[i]
-4   return sum
-```
-
-#### Solution
+> Consider the procedure $\text{Sum-Array}$ on the facing page. It computes the
+> sum of the $n$ numbers in array $A[1:n]$. State a loop invariant for this
+> procedure, and use its initialization, maintenance, and termination properties
+> to show that the $\text{Sum-Array}$ procedure returns the sum of the numbers in
+> $A[1:n]$.
+>
+> $\text{Sum-Array}(A, n)$:
+>
+> ```
+> 1   sum = 0
+> 2   for i = 1 to n
+> 3       sum = sum + A[i]
+> 4   return sum
+> ```
 
 Loop invariant: At the start of the **for** loop on line 2, `sum` is the
-correct sum of *A*[1:*i*]
+correct sum of $A[1:i]$
 
 Initialization: Prior to the first iteration, there are no elements in the
 sequence, and the sum is correctly zero.
 
-Maintenance: Each iteration adds the value *A*[*i*] to the `sum`, which means
-that the `sum` still correctly reflects *A*[1:[*i*]].
+Maintenance: Each iteration adds the value $A[i]$ to the `sum`, which means
+that the `sum` still correctly reflects $A[1:i]$.
 
-Termination: The loop variable *i* terminates after all values 1 to *n* are
-exhausted. Once *i* = *n* + 1, sum will correctly equal the sum of all values
-in *A*[1:*n*], which means our algorithm is correct.
+Termination: The loop variable *i* terminates after all values 1 to $n$ are
+exhausted. Once $i=n+1$, sum will correctly equal the sum of all values
+in $A[1:n]$, which means our algorithm is correct.
 
 ### 2.1-3
 
-Rewrite the **Insertion-Sort** procedure to sort into monotonically decreasing
-insteadof monotonically increasing order.
+Rewrite the $\text{Insertion-Sort}$ procedure to sort into monotonically
+decreasing instead of monotonically increasing order.
 
 #### Solution
 
-**Insertion-Sort**(*A*, *n*):
+$\text{Insertion-Sort}(A, n)$:
 
 ```
 1   for i = 2 to n
@@ -88,22 +87,20 @@ insteadof monotonically increasing order.
 
 ### 2.1-4
 
-Consider the *searching problem*:
+> Consider the *searching problem*:
+>
+> **Input:** A sequence of $n$ numbers $\langle a_1, a_2, \dots, a_n \rangle$
+> stored in array $A[1:n]$ and a value $x$.
+>
+> **Output:** An index $i$ such that $x$ equals $A[i]$ or the special value
+> $\text{NIL}$ of $x$ does not appear in $A$.
+>
+> Write pseudocode for *linear search*, which scans through the array from
+> beginning to end, looking for $x$. Using a loop invariant, prove that your
+> algorithm is correct. Make sure that your loop invariant fulfills the three
+> necessary properties.
 
-**Input:** A sequence of *n* numbers «*a*<sub>1</sub>, *a*<sub>2</sub>, ...
-*a*<sub>*n*</sub>» stored in arrayt *a*[1:*n*] and a value *x*.
-
-**Output:** An index *i* such that *x* equals *A*[*i*] or the special value
-`NIL` of *x* does not appear in *A*.
-
-Write pseudocode for *linear search*, which scans through the array from
-beginning to end, looking for *x*. Using a loop invariant, prove that your
-algorithm is correct. Make sure that your loop invariant fulfills the three
-necessary properties.
-
-#### Solution
-
-**Linear-Search**(*A*[*n*], *x*):
+$\text{Linear-Search}(A[n], x)$:
 
 ```
 1   for i = 1 to n
@@ -113,6 +110,14 @@ necessary properties.
 ```
 
 Loop invariant: At the start of each iteration of the **for** loop, the
-subarray $A[1..i-1]$ do not contain the value $x$.
+subarray $A[1:i-1]$ do not contain the value $x$.
 
-Initialization: Prior to the first iteration, the subarray
+Initialization: Prior to the first iteration, the subarray is empty and
+therefore cannot contain the value $x$.
+
+Maintenance: Each iteration tests if $A[i]$ is the value $x$, which still means
+that $A[1:i-1]$ cannot contain $x$.
+
+Termination. The loop terminates when $A[i] = x$, in which case the subarray
+$A[1:i-1]$ will still never actually include $A[i]$, i.e., $x$. Therefore, the
+algorithm is correct.
