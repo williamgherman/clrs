@@ -121,3 +121,29 @@ that $A[1:i-1]$ cannot contain $x$.
 Termination. The loop terminates when $A[i] = x$, in which case the subarray
 $A[1:i-1]$ will still never actually include $A[i]$, i.e., $x$. Therefore, the
 algorithm is correct.
+
+### 2.1-5
+
+> Consider the problem of adding two $n$-bit binary integers $a$ and $b$,
+> stored in two $n$-element arrays $A[0:n-1]$ and $B[0:n-1]$, where each
+> element is either 0 or 1, $a = \sum_{i=0}^{n-1} A[i] \cdot 2^{i}$, and $b =
+> \sum_{i=0}^{n-1} B[i] \cdot 2^{i}$. The sum $c = a + b$ of the two integers
+> should  be stored in binary form in an $(n + 1)$-element array $C[0:n]$,
+> where $c = \sum_{i=0}^{n} C[i] \cdot 2^{i}$. Write a procedure
+> $\text{Add-Binary-Integers$ that takes as input arrays $A$ and $B$, along
+> with the length $n$, and returns array $C$ holding the sum.
+
+$\text{Add-Binary-Integers}(A, B, n)$:
+
+```cpp
+carry = 0
+for i = 0 to n-1
+    if A[i] + B[i] == 2
+        carry = 1
+        C[i] = 1
+    else
+        C[i] = A[i] + B[i]
+        carry = 0
+C[n+1] = carry
+return C
+```
