@@ -171,6 +171,7 @@ $\Theta(n^3)$
 > better?
 
 $\text{Selection-Sort}(A, n)$:
+
 ```cpp
 for i = 1 to n - 1
     current = A[i]
@@ -243,7 +244,7 @@ merge        [3, 9, 26, 38, 41, 49, 52, 57]
 > up successfully running and call $\text{Merge-Sort}(A, 2, 1)$.
 
 
-If $\text{Merge-Sort}(A, 1, n)$ is called, given $n \gte 1$: in the edge case
+If $\text{Merge-Sort}(A, 1, n)$ is called, given $n \ge 1$: in the edge case
 $\text{Merge-Sort}(A, 1, 1)$, it successfully halts and returns. Otherwise, it
 will always result in a call of $\text{Merge-Sort}$ where $p = r$ and halts.
 
