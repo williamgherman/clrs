@@ -255,4 +255,147 @@ will always result in a call of $\text{Merge-Sort}$ where $p = r$ and halts.
 > of lines 20-23 and 24-27, to prove that the $\text{Merge}$ procedure is
 > correct.
 
+The **while** loop is valid when the following loop invariant is true: the
+subarray of $A[p:k-1]$ contains the smallest values in $L$ and $R$ up to their
+$i$th and $j$th elements, respectively, all in sorted order.
 
+Initialization: $k = p$, so $A[p:k-1]$ is empty, still fullfilling the loop
+invariant.
+
+Maintenance: during each call, $A[k]$ is assigned the smallest value of either
+$L[i]$ or $R[j]$, whose counters are incremented. The invariant remains valid.
+
+Termination: After the **while** loop, either $L$ or $R$ is entirely used, but
+$k$ has still increased, but since the invariant counts to $k-1$, the invariant
+remains valid.
+
+Afterwards, the two additional **while** loops are run, adding the last few
+elements of $L$ or $R$ into $A$, but each time, the smallest element of the
+relevant array is copied in, and $i$ or $j$ is increased alongside $k$. By the
+end, all values are correctly copied to $A$ in sorted order up to the length of
+$R$ and $L$ ($n_L$ and $n_R$).
+
+### 2.3-4
+
+> Use mathematical induction to show that when $n \ge 2$ is an exact power of 2,
+> the solution of the recurrence
+>
+> $$
+> T(n) =
+> \begin{cases}
+> 2 & \text{if} n = 2 \\
+> 2T(n/2) + n & \text{if} n > 2
+> \end{cases}
+> $$
+>
+> is $T(n) = n \lg n$.
+
+Base case: $n = 2$, $2 = 2 \lg 2$ is true. If we assume $T(n) = n \lg n$ is
+true, and assuming that $T(2^k)$ is true, then the inductive case $T(2^{k+1})$ is:
+
+$$
+\begin{align}
+2T(2^k/2) + 2^k &= 2^k \lg 2^k \\
+2T(2^{k+1}/2) + 2^{k+1} &= 2^{k+1} \lg 2^{k+1} \\
+2T(2^k) + 2^{k+1} &= 2^{k+1}(k+1) \\
+2(2^k \lg 2^k) + 2^{k+1} &= 2^{k+1}(k+1) \\
+2^{k+1}k + 2^{k+1} &= 2^{k+1}(k+1) \\
+2^{k+1}(k + 1) &= 2^{k+1}(k+1)
+\end{align}
+$$
+
+Therefore, all values of $n = 2^k$ (i.e., all powers of two) allow the solution
+$n \lg n$ to be true for $T(n)$.
+
+### 2.3-5
+
+> You can also think of insertion sort as a recursive algorithm. In order to
+> sort $A[1 \subarr n]$, recursively sort the subarray $A[1 \subarr n - 1]$ and
+> then insert $A[n]$ into the sorted subarray $A[1 \subarr n - 1]$. Write
+> pseudocode for this recursive version of insertion sort. Give a recurrence
+> for its worst-case running time.
+
+$\text{Insertion-Sort}(A, n)$:
+
+```cpp
+if n == 1
+    return A[n]
+j = n - 1
+INSERTION_SORT(A, j)
+key = A[n]
+while j > 0 and A[j] > key
+    A[j+1] = A[j]
+    j = j - 1
+A[j+1] = key
+```
+
+In the worst case, in which the values are reverse-sorted, we get the
+recurrence:
+
+$$
+T(n) =
+\begin{cases}
+\Theta(1) & \text{if n = 1} \\
+T(n-1) + \Theta(n) & \text{if} n > 1
+\end{cases}
+$$
+
+### 2.3-6
+
+> Referring back to the searching problem (see Exercise 2.1-4), observe that if
+> the subarray being searched is already sorted, the searching algorithm can
+> check the midpoint of the subarray against $v$ and elimate half of the
+> subarray from further consideration. The *binary search* algorithm repeats
+> this procedure, halving the size of the remaining portion of the subarray
+> each time. Write pseudocode, either iterative or recursive, for binary
+> search. Argue that the worst-case running time of binary search is
+> $\Theta(\lg n)$.
+
+> [!IMPORTANT]
+> Slight correction in the problem, it should refer to $x$, not $v$ for the
+> searched value.
+
+$\text{Binary-Search}(A, x, begin, end)
+
+```cpp
+if begin > end
+    return NIL
+midway = floor((begin + end)/2)
+if A[midway] == x
+    return midway
+else if A[midway+1] > x
+    return BINARY_SEARCH(A[begin:midway-1], x)
+else
+    return BINARY_SEARCH(A[midway+1:end], x)
+```
+
+Because the algorithm removes half of the elements in each iteration, we end up
+with $T(n) = T(n/2) + \Theta(1)$ which is $\Theta(\lg n)$.
+
+### 2.3-7
+
+> The **while** loop of lines 5-7 of the $\text{Insertion-Sort}$ procedure in
+> Section 2.1 uses a linear search to scan (backward) through the sorted
+> subarray $A[1 \subarr j - 1]$. What if insertion sort used a binary search
+> (see Exercise 2.3-6) instead of a linear search? Would that improve the
+> overall worst-case running time of insertion sort to $\Theta(n \lg n)$?
+
+Although the search would be improved to half of the operations in the worst
+case, the algorithm also moves every element individually to the right which
+still must be done with this improved algorithm. Therefore, this improvement
+would not reduce the running time to $\Theta(n \lg n)$.
+
+### 2.3-8
+
+> Describe an algorithm that, given a set $S$ of $n$ integers and another
+> integer $x$, determines whether $S$ contains two elements that sum to exactly
+> $x$. Your algorithm should take $\Theta(n \lg n)$ time in the worst case.
+
+> [!NOTE]
+> Since $S$ is a mathematical set, each integer within only appears exactly
+> once. Therefore, $x/2$ if within the set cannot be a solution to the problem.
+
+This algorithm must first sort the elements in $S$ and then perform a search
+for each element's compliment $j = x - i$. If $i$ and $j$ exist, then that is
+the solution. In the worst case, $T(n) = \Theta(n \lg n)$ time since there
+would be $n$ iterations of binary search ($\Theta(\lg n)$).
