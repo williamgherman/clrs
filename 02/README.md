@@ -335,7 +335,7 @@ recurrence:
 $$
 T(n) =
 \begin{cases}
-\Theta(1) & \text{if n = 1} \\
+\Theta(1) & \text{if} n = 1 \\
 T(n-1) + \Theta(n) & \text{if} n > 1
 \end{cases}
 $$
@@ -398,7 +398,7 @@ would not reduce the running time to $\Theta(n \lg n)$.
 This algorithm must first sort the elements in $S$ and then perform a search
 for each element's compliment $j = x - i$. If $i$ and $j$ exist, then that is
 the solution. In the worst case, $T(n) = \Theta(n \lg n)$ time since there
-would be $n$ iterations of binary search ($\Theta(\lg n)$).
+would be $n$ iterations of binary search ( $\Theta(\lg n)$ ).
 
 # Problems
 
@@ -465,7 +465,7 @@ merge sort, whatever that is on that machine.
 > repeatedly swapping adjacent elements that are out of order. The procedure
 > $\text{Bubblesort}$ sorts array $A[1:n]$.
 >
-> ### $\text{Bubblesort}(A,n)
+> ### $\text{Bubblesort}(A,n)$
 >
 > ```cpp
 > for i = 1 to n - 1
@@ -479,7 +479,7 @@ merge sort, whatever that is on that machine.
 > that it terminates and that
 >
 > $$
-> A'[1] \le A'[2] \le \dots \le A'[n]\label{2.5}
+> A'[1] \le A'[2] \le \dots \le A'[n] \text{    (2.5)}
 > $$
 >
 > In order to show that $\text{Bubblesort}$ actually sorts, what else do you
@@ -543,10 +543,10 @@ all values to $n-1$, therefore:
 
 $$
 \begin{align}
-\sum_{i=1}^{n-1}(n-1) &= \sum_{i=1}^{n-1}n - \sum_{i=1}^{n-1}i
-&= n(n-1) - \frac{n(n-1)}{2}
-&= \frac{n(n-1)}{2}
-&= \frac{n^2-n}{2}
+\sum_{i=1}^{n-1}(n-1) &= \sum_{i=1}^{n-1}n - \sum_{i=1}^{n-1}i \\
+&= n(n-1) - \frac{n(n-1)}{2} \\
+&= \frac{n(n-1)}{2} \\
+&= \frac{n^2-n}{2} \\
 \end{align}
 $$
 
