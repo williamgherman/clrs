@@ -310,8 +310,8 @@ $n \lg n$ to be true for $T(n)$.
 ### 2.3-5
 
 > You can also think of insertion sort as a recursive algorithm. In order to
-> sort $A[1 \subarr n]$, recursively sort the subarray $A[1 \subarr n - 1]$ and
-> then insert $A[n]$ into the sorted subarray $A[1 \subarr n - 1]$. Write
+> sort $A[1:n]$, recursively sort the subarray $A[1:n-1]$ and
+> then insert $A[n]$ into the sorted subarray $A[1:n - 1]$. Write
 > pseudocode for this recursive version of insertion sort. Give a recurrence
 > for its worst-case running time.
 
@@ -376,7 +376,7 @@ with $T(n) = T(n/2) + \Theta(1)$ which is $\Theta(\lg n)$.
 
 > The **while** loop of lines 5-7 of the $\text{Insertion-Sort}$ procedure in
 > Section 2.1 uses a linear search to scan (backward) through the sorted
-> subarray $A[1 \subarr j - 1]$. What if insertion sort used a binary search
+> subarray $A[1:j - 1]$. What if insertion sort used a binary search
 > (see Exercise 2.3-6) instead of a linear search? Would that improve the
 > overall worst-case running time of insertion sort to $\Theta(n \lg n)$?
 
@@ -399,3 +399,156 @@ This algorithm must first sort the elements in $S$ and then perform a search
 for each element's compliment $j = x - i$. If $i$ and $j$ exist, then that is
 the solution. In the worst case, $T(n) = \Theta(n \lg n)$ time since there
 would be $n$ iterations of binary search ($\Theta(\lg n)$).
+
+# Problems
+
+## Problem 2-1: Insertion sort on small arrays in merge sort
+
+> Although merge sort runs in $\Theta(n \lg n)$ worst-case time and insertion
+> sort runs in $\Theta(n^2)$ worst-case time, the constant factors in insertion
+> sort can make it faster in practice for small problem sizes on many machines.
+> Thus it makes sense to *coarsen* the leaves of the recursion by using
+> insertion sort within merge sort when subproblems become sufficiently small.
+> Consider a modification to merge sort in which $n/k$ sublists of length $k$
+> are sorted using insertion sort and then merged using the standard merging
+> mechanism, where $k$ is a value to be determined.
+>
+> ***a.*** Show that insertion sort can sort the $n/k$ sublists, each of length $k$
+> in $\Theta(nk)$ worst-case time.
+>
+> ***b.*** Show how to merge the sublists in $\Theta(n \lg (n / k))$ worst-case
+> time.
+>
+> ***c.*** Given that the modified algorithm runs in $\Theta(nk + n \lg(n/k))$
+> worst-case time, what is the largest value of $k$ as a function of $n$ for
+> which the modified algorithm has the same running time as standard merge
+> sort, in terms of $\Theta$-notation?
+>
+> ***d.*** How should you choose $k$ in practice?
+
+### a.
+
+Insertion sort runs in quadratic time, $\Theta(k^2)$ in the worst case. But
+since we are solving $n/k$ sublists, we get $\Theta(k^2 \cdot nk^{-1})$ which
+reduces to $\Theta(nk)$.
+
+### b.
+
+You would have to merge the lists one pair at a time again and again until
+there is one big list. If you just merged all the lists together at once, it
+would still take $\Theta(n^2/k)$ time.
+
+### c.
+
+Since merge sort runs at $\Theta(n \lg n)$, so we just have to reduce the
+expressions:
+
+$$
+\begin{align}
+nk + n \lg(n/k) &= n \lg n
+k + \lg (n/k) &= \lg n
+\end{align}
+$$
+
+See that $k$ cannot be greater than $n \lg n$ since then it would make the
+insertion sort algorithm run at $\Theta(n^2)$ or greater since $k$ grows
+relative to $n$. Therefore, the largest value for $k$ would be $\lg n$.
+
+### d.
+
+$k$ should actually be small enough so that the algorithm runs faster than
+merge sort, whatever that is on that machine.
+
+## Problem 2-2: Correctness of bubblesort
+
+> Bubblesort is a popular, but inefficient, sorting algorithm. It works by
+> repeatedly swapping adjacent elements that are out of order. The procedure
+> $\text{Bubblesort}$ sorts array $A[1:n]$.
+>
+> ### $\text{Bubblesort}(A,n)
+>
+> ```cpp
+> for i = 1 to n - 1
+>     for j = n downto i + 1
+>         if A[j] < A[j - 1]
+>             exchange A[j] with A[j-1]
+> ```
+>
+> ***a.*** Let $A'$ denote the array $A$ after $\text{Bubblesort}(A,n)$ is
+> executed. To prove that $\text{Bubblesort}$ is correct, you need to prove
+> that it terminates and that
+>
+> $$
+> A'[1] \le A'[2] \le \dots \le A'[n]\label{2.5}
+> $$
+>
+> In order to show that $\text{Bubblesort}$ actually sorts, what else do you
+> need to prove?
+>
+> The next two parts prove inequality (2.5 *[equation above]*).
+>
+> ***b.*** State precisely a loop invariant for the **for** loop in lines 2-4,
+> and prove that this loop invariant holds. Your proof should use the structure
+> of the loop-invariant proof presented in this chapter.
+>
+> ***c.*** Using the termination condition of the loop invariant proved in part
+> (b), state a loop invariant for the **for** loop in lines 1-4 that allows you
+> to prove inequality (2.5). Your proof should use the structure of the
+> loop-invariant proof presented in this chapter.
+>
+> ***d.*** What is the worst-case running time of $\text{Bubblesort}$? How does
+> it compare with the running time of $\text{Insertion-Sort}$?
+
+### a.
+
+You need to show that $A'$ is actually a reordering of $A$ and not just some
+$n$ numbers in sequential order. Otherwise `return [1..n]` would be accepted.
+
+### b.
+
+Loop invariant: $A[j]$ contains the smallest element in $A[j:n]$, which is a
+permutation of $A[j:n]$ before the loop ran.
+order.
+
+Initialization: Before the loop is ran, $A[j:n] = A[n]$ which, since it is just
+one element, must be its smallest element.
+
+Maintenance: Through each iteration of the second **for** loop, $A[j:n]$ sorts
+$A[j]$ down one element if it is smaller than the previous element in $A$,
+therefore it must be the smallest element in $A[j:n]$.
+
+Termination: After the loop is completed, $j = i$ and $A[i]$ is the smallest
+element in $A[i:n]$ which satisfies the loop invariant.
+
+### c.
+
+Loop invariant: $A[1:i-1]$ contains $i-1$ of the smallest values of $A[1:n]$ in
+sorted order, and the remaining elements $A[i:n]$ are the remaining larger
+values of $A$.
+
+Initialization: $A[1:0]$ is empty, therefore valid.
+
+Maintenance: The second **for** loop makes $A[i]$ the smallest element in
+$A[i:n]$ (from part (b)), and now $A[1:i-1]$ contains elements of $A$ smaller
+than $A[i]$, in sorted order as a permutation of $A[1:n]$.
+
+Termination: When the loop terminates, $i=n$, which is in the last position in
+$A$. Since $A[1:n-1]$ is in correct, sorted order, $A[n] \ge A[i-1]$ and the
+invariant holds.
+
+### d.
+
+For each value of $i$, the second **for** loop runs $n-1$ iterations, checking
+all values to $n-1$, therefore:
+
+$$
+\begin{align}
+\sum_{i=1}^{n-1}(n-1) &= \sum_{i=1}^{n-1}n - \sum_{i=1}^{n-1}i
+&= n(n-1) - \frac{n(n-1)}{2}
+&= \frac{n(n-1)}{2}
+&= \frac{n^2-n}{2}
+\end{align}
+$$
+
+Whose largest factor is $n^2$, so $\text{Bubblesort}$ runs in the same scale as
+$\text{Insertion-Sort}$, $\Theta(n^2)$.
