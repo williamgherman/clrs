@@ -550,3 +550,72 @@ $$
 
 Whose largest factor is $n^2$, so $\text{Bubblesort}$ runs in the same scale as
 $\text{Insertion-Sort}$, $\Theta(n^2)$.
+
+## Problem 2-3: Correctness of Horner's rule
+
+> You are given the coefficients $a_0, a_1, a_2, \dots , a_n$ of a polynomial
+>
+> $$
+> \begin{align}
+> P(x) &= \sum_{k=0}^{n} a_k x^k
+> &= a_0 + a_1 x + a_2 x^2 + \dots + a_{n-1} x^{n-1} + a_n x^n
+> \end{align}
+> $$
+>
+> and you want to evaluate this polynomial for a given value of $x4. *Horner's
+> rule* says to evaluate the polynomial according to this parenthesization:
+>
+> $$
+> P(x) = a_0 + x\left(a_1 + x\left(a_2 + \dots + x\left(a_{n-1} + xa_n\right) \dots \right) \right)
+> $$
+>
+> The procedure $\text{Horner}$ implement's Horner's rule to evaluate $P(x)$,
+> given the coefficients $a_0, a_1, a_2, \dots , a_n$ in an array $A[0:n]$ and
+> the values of $x$.
+>
+> ### $\text{Horner}(A, n, x)$
+>
+> ```cpp
+> p = 0
+> for i = n downto 0
+>     p = A[i] + x * p
+> return p
+> ```
+>
+> ***a.*** In terms of $\Theta$-notation, what is the running time of this
+> procedure?
+>
+> ***b.*** Write pseudocode to implement the naive polynomial-evaluation
+> algorithm that computes each term of the polynomial from scratch. What is the
+> running time of this algorithm? How does it compare with $\text{Horner}$?
+>
+> ***c.*** Consider the following loop invariant for the procedure
+> $\text{Horner}$:
+>
+> At the start of each iteration of the **for** loop of lines 2-3,
+>
+> $$
+> p = \sum_{k=0}^{n-(i+1)} A[k+i+1] \cdot x^k
+> $$
+>
+> Interpret a summation with no terms as equaling 0. Following the structure of
+> the loop-invariant proof presented in this chapter, use this loop invariant to
+> show that, at termination, $p = \sum_{k=0}^{n} A[k] \cdot x^k$.
+
+## Problem 2-4: Inversions
+
+> Let $A[1:n]$ be an array of $n$ distinct numbers. If $i < j$ and $A[i] >
+> A[j]$, then the pair $(i, j)$ is called an inversion of $A$.
+>
+> ***a.*** List the five inversions of the array $\langle 2, 3, 8, 6, 1
+> \rangle$.
+>
+> ***b.*** What array with elements from the set $\{1, 2, \dots , n\}$ has the
+> most inversions? How many does it have?
+>
+> ***c.*** What is the relationship between the running time of insertion sort
+> and the number of inversions in the input array? Justify your answer.
+>
+> ***d.*** Give an algorithm that determines the number of inversions in any
+> permutation on $n$ elements in $\Theta(n \lg n)$ worst-case time. (*Hint:*
+> Modify merge sort.
