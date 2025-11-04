@@ -43,7 +43,7 @@
 > to show that the $\text{Sum-Array}$ procedure returns the sum of the numbers in
 > $A[1:n]$.
 >
-> $\text{Sum-Array}(A, n)$:
+> ### $\text{Sum-Array}(A, n)$
 >
 > ```
 > 1   sum = 0
@@ -67,12 +67,10 @@ in $A[1:n]$, which means our algorithm is correct.
 
 ### 2.1-3
 
-Rewrite the $\text{Insertion-Sort}$ procedure to sort into monotonically
-decreasing instead of monotonically increasing order.
+> Rewrite the $\text{Insertion-Sort}$ procedure to sort into monotonically
+> decreasing instead of monotonically increasing order.
 
-#### Solution
-
-$\text{Insertion-Sort}(A, n)$:
+### $\text{Insertion-Sort}(A, n)$
 
 ```
 1   for i = 2 to n
@@ -100,7 +98,7 @@ $\text{Insertion-Sort}(A, n)$:
 > algorithm is correct. Make sure that your loop invariant fulfills the three
 > necessary properties.
 
-$\text{Linear-Search}(A[n], x)$:
+### $\text{Linear-Search}(A[n], x)$
 
 ```
 1   for i = 1 to n
@@ -133,7 +131,7 @@ algorithm is correct.
 > $\text{Add-Binary-Integers}$ that takes as input arrays $A$ and $B$, along
 > with the length $n$, and returns array $C$ holding the sum.
 
-$\text{Add-Binary-Integers}(A, B, n)$:
+### $\text{Add-Binary-Integers}(A, B, n)$
 
 ```cpp
 carry = 0
@@ -170,7 +168,7 @@ $\Theta(n^3)$
 > of selection sort in $\Theta$-notation. Is the best-case running time any
 > better?
 
-$\text{Selection-Sort}(A, n)$:
+### $\text{Selection-Sort}(A, n)$
 
 ```cpp
 for i = 1 to n - 1
@@ -257,7 +255,7 @@ will always result in a call of $\text{Merge-Sort}$ where $p = r$ and halts.
 
 The **while** loop is valid when the following loop invariant is true: the
 subarray of $A[p:k-1]$ contains the smallest values in $L$ and $R$ up to their
-$i$th and $j$th elements, respectively, all in sorted order.
+$i$ and $j$ numbered elements, respectively, all in sorted order.
 
 Initialization: $k = p$, so $A[p:k-1]$ is empty, still fullfilling the loop
 invariant.
@@ -315,7 +313,7 @@ $n \lg n$ to be true for $T(n)$.
 > pseudocode for this recursive version of insertion sort. Give a recurrence
 > for its worst-case running time.
 
-$\text{Insertion-Sort}(A, n)$:
+### $\text{Insertion-Sort}(A, n)$:
 
 ```cpp
 if n == 1
@@ -355,7 +353,7 @@ $$
 > Slight correction in the problem, it should refer to $x$, not $v$ for the
 > searched value.
 
-$\text{Binary-Search}(A, x, begin, end)
+### $\text{Binary-Search}(A, x, begin, end)$:
 
 ```cpp
 if begin > end
