@@ -557,7 +557,7 @@ $\text{Insertion-Sort}$, $\Theta(n^2)$.
 >
 > $$
 > \begin{align}
-> P(x) &= \sum_{k=0}^{n} a_k x^k
+> P(x) &= \sum_{k=0}^{n} a_k x^k \\
 > &= a_0 + a_1 x + a_2 x^2 + \dots + a_{n-1} x^{n-1} + a_n x^n
 > \end{align}
 > $$
