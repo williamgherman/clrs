@@ -1,6 +1,6 @@
 # Exercises
 
-## Section 2.1
+
 
 ### 2.1-1
 
@@ -168,7 +168,7 @@ $\Theta(n^3)$
 > of selection sort in $\Theta$-notation. Is the best-case running time any
 > better?
 
-### $\text{Selection-Sort}(A, n)$
+### $`\text{Selection-Sort}(A, n)`$
 
 ```cpp
 for i = 1 to n - 1
@@ -353,7 +353,7 @@ $$
 > Slight correction in the problem, it should refer to $x$, not $v$ for the
 > searched value.
 
-### $\text{Binary-Search}(A, x, begin, end)$:
+### $`\text{Binary-Search}(A, x, begin, end)`$:
 
 ```cpp
 if begin > end
@@ -602,6 +602,52 @@ $\text{Insertion-Sort}$, $\Theta(n^2)$.
 > the loop-invariant proof presented in this chapter, use this loop invariant to
 > show that, at termination, $p = \sum_{k=0}^{n} A[k] \cdot x^k$.
 
+### a.
+
+$\Theta(n)$.
+
+### b.
+
+### $\text{Polynomial-Eval}(A, n, x)
+
+```cpp
+sum = 0
+for i = 0 to n
+    power = 1
+    for j = 1 to i
+        power = power * x
+    sum = sum + A[i] * power
+return sum
+```
+
+Because we have to evaluate the inner loop a number of times per `i`s, we are
+increasing the amount of instructions quadratically relative to `n`:
+$\Theta(n^2)$.
+
+### c.
+
+Initialization: As the **for** loop starts, $i = n$, so we get $k=0$ to $k=-1$,
+which means the summation is empty, so $p = 0$, which is true.
+
+Maintenance: To find the new value of $p$:
+
+$$
+\begin{align}
+p' &= A[i] + x \cdot p \\
+&= A[i] + x \cdot \sum_{k=0}^{n-(i+1)} A[k + i + 1] \cdot x^k \\
+&= A[i] + \sum_{k=0}^{n-(i+1)} A[k + i + 1] \codt x^{k+1} \\
+&= A[i] + \sum_{k=1}^{n-i} A[k + i] \cdot x^k \\
+&= \sum_{k=0}^{n-i} A[k + i] \cdot x^k
+\end{align}
+$$
+
+After, $i$ increases by one, so we get $\sum{k=0}^{n-(i+1)} A[k + i + 1] \cdot
+x^k$ which is correct.
+
+Termination: The loop ends as $i=-1$, making the sum $\sum_{k=0}^{n} A[k]x^k$
+which is correct.
+
+
 ## Problem 2-4: Inversions
 
 > Let $A[1:n]$ be an array of $n$ distinct numbers. If $i < j$ and $A[i] >
@@ -610,8 +656,8 @@ $\text{Insertion-Sort}$, $\Theta(n^2)$.
 > ***a.*** List the five inversions of the array $\langle 2, 3, 8, 6, 1
 > \rangle$.
 >
-> ***b.*** What array with elements from the set $\{1, 2, \dots , n\}$ has the
-> most inversions? How many does it have?
+> ***b.*** What array with elements from the set $\lbrace 1, 2, \dots ,
+> n\rbrace$ has the most inversions? How many does it have?
 >
 > ***c.*** What is the relationship between the running time of insertion sort
 > and the number of inversions in the input array? Justify your answer.
@@ -619,3 +665,65 @@ $\text{Insertion-Sort}$, $\Theta(n^2)$.
 > ***d.*** Give an algorithm that determines the number of inversions in any
 > permutation on $n$ elements in $\Theta(n \lg n)$ worst-case time. (*Hint:*
 > Modify merge sort.
+
+### a.
+
+$$
+((1,5),(2,5),(3,4),(3,5),(4,5)
+$$
+
+### b.
+
+$[n,n-1, \dots, 1]$ has $(n^2-n)/2$ inversions.
+
+### c.
+
+Each iteration of the **while** loop in insertion short moves one inversion out
+of scope. Therefore, the number of inversions is directly related to the number
+of instructions of insertion sort.
+
+### d.
+
+All we really need to do is modify merge sort to count each move as an
+inversion as the lists are sorted and return the total.
+
+### $\text{Count-Inversions}(A,p,r)$
+
+```cpp
+inversions = 0
+if p < r
+    q = floor((p + r)/2)
+    inversions = inversions + COUNT_INVERSIONS(A,p,q)
+    inversions = inversions + COUNT_INVERSIONS(A,q+1,r)
+    inversions = inversions + MERGE_INVERSIONS(A,p,q,r)
+return inversions
+```
+
+### $\text{Merge-Inversions}(A,p,q,r)$
+
+```cpp
+n_l = q - p + 1
+n_r = r - q
+let L[0:n_l - 1] and R[0:n_r - 1] be new arrays
+for i = 0 to n_l - 1
+    L[i] = A[p+i]
+for j = 0 to n_r - 1
+    R[i] = A[q+j]
+i = 0
+j = 0
+k = p
+inversions = 0
+while i < n_l and j < n_r
+    if L[i] <= R[j]
+        inversions = inversions + n_l - i
+        A[k] = L[i]
+        i = i + 1
+    else A[k] = R[j]
+        j = j + 1
+    k = k + 1
+while i < n_l
+    A[k] = R[j]
+    j = j + 1
+    k = k + 1
+return inversions
+```
