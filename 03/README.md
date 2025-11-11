@@ -61,9 +61,9 @@
 >
 > $$
 > \begin{align}
-> O(g(n,m)) = \lbrace f(n,m) &: \text{there exist positive constants} c, n_{0}, \text{and} m_{0} \\
-> & \text{such that} 0 \le f(n,m) \le cg(n,m) \\
-> & \text{for all} n \ge n_{0} \text{or} m \ge m_{0} \rbrace.
+> O(g(n,m)) = \lbrace f(n,m) &: \text{there exist positive constants } c, n_{0}, \text{ and } m_{0} \\
+> & \text{such that } 0 \le f(n,m) \le cg(n,m) \\
+> & \text{for all } n \ge n_{0} \text{ or } m \ge m_{0} \rbrace.
 > \end{align}
 > $$
 >
@@ -87,7 +87,7 @@
 
 > Use equation (3.14) or any other means to show that $(n + o(n))^k =
 > \Theta(n^k)$ for any real constant $k$. Conclude that $\lceil n \rceil ^k =
-> $\Theta(n^k)$ and $\lfloor n \rfloor ^k = \Theta(n^k)$.
+> \Theta(n^k)$ and $\lfloor n \rfloor ^k = \Theta(n^k)$.
 >
 > Equation (3.14):
 >
@@ -145,7 +145,7 @@
 > F_{i} = (\phi^{i} - \hat{\phi}^{i})/\sqrt{5}
 > $$
 >
-> where $\phi$ is the golden ratio and $\hat{phi}$ is its conjugate.
+> where $\phi$ is the golden ratio and $\hat{\phi}$ is its conjugate.
 
 ### 3.3-9
 
