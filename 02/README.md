@@ -443,7 +443,7 @@ expressions:
 
 $$
 \begin{align}
-nk + n \lg(n/k) &= n \lg n
+nk + n \lg(n/k) &= n \lg n \\
 k + \lg (n/k) &= \lg n
 \end{align}
 $$
@@ -608,7 +608,7 @@ $\Theta(n)$.
 
 ### b.
 
-### $\text{Polynomial-Eval}(A, n, x)
+### $`\text{Polynomial-Eval}(A, n, x)`$
 
 ```cpp
 sum = 0
@@ -641,7 +641,7 @@ p' &= A[i] + x \cdot p \\
 \end{align}
 $$
 
-After, $i$ increases by one, so we get $\sum{k=0}^{n-(i+1)} A[k + i + 1] \cdot
+After, $i$ increases by one, so we get $\sum_{k=0}^{n-(i+1)} A[k + i + 1] \cdot
 x^k$ which is correct.
 
 Termination: The loop ends as $i=-1$, making the sum $\sum_{k=0}^{n} A[k]x^k$
@@ -669,7 +669,7 @@ which is correct.
 ### a.
 
 $$
-((1,5),(2,5),(3,4),(3,5),(4,5)
+(1,5),(2,5),(3,4),(3,5),(4,5)
 $$
 
 ### b.
