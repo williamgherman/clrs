@@ -61,9 +61,9 @@
 >
 > $$
 > \begin{align}
-> O(g(n,m)) = \lbrace f(n,m) &: \text{there exist positive constants } c, n_{0}, \text{ and } m_{0} \\
+> O(g(n,m)) = \Big\lbrace f(n,m) : & \text{there exist positive constants } c, n_{0}, \text{ and } m_{0} \\
 > & \text{such that } 0 \le f(n,m) \le cg(n,m) \\
-> & \text{for all } n \ge n_{0} \text{ or } m \ge m_{0} \rbrace.
+> & \text{for all } n \ge n_{0} \text{ or } m \ge m_{0} \Big\rbrace.
 > \end{align}
 > $$
 >
@@ -105,7 +105,7 @@
 > ***a.*** Equation (3.21)
 >
 > $$
-> a^{log_{b}c} = c^{log_{b}a}
+> a^{\log_{b}c} = c^{\log_{b}a}
 > \tag{3.21}
 > $$
 >
@@ -223,7 +223,7 @@
 >
 > ***a.*** $f(n) = O(g(n))$ implies $g(n) = O(f(n))$.
 >
-> ***b.*** $f(n) + g(n) = \Theta(\text{min}\lbracef(n), g(n) \rbrace)$.
+> ***b.*** $f(n) + g(n) = \Theta(\text{min}\lbrace f(n), g(n) \rbrace)$.
 >
 > ***c.*** $f(n) = O(g(n))$ implies $\lg f(n) = O(\lg g(n))$, where $\lg g(n)
 > \ge 1$ and $f(n) \ge 1$ for all sufficiently large $n$.
@@ -310,7 +310,7 @@
 > \begin{align}
 > \widetilde{O}(g(n)) = \lbrace f(n) : & \text{there exist positive constants
 > $c$, $k$ and $n_{0}$ such that} \\
-> 0 \le f(n) \le cg(n) \lg^{k}(n) \text{ for all } n \ge n_{0} \rbrace \text{ .}
+> & 0 \le f(n) \le cg(n) \lg^{k}(n) \text{ for all } n \ge n_{0} \rbrace \text{ .}
 > \end{align}
 > $$
 >
@@ -321,20 +321,20 @@
 
 > We can apply the iteration operator $\ast$ used in the $`\lg^{\ast}`$
 > function to any monotonically increasing function $f(n)$ over the reals. For
-> a given constant $c \in \textbb{R}$, we define the iterated function
+> a given constant $c \in \mathbb{R}$, we define the iterated function
 > $f_{c}^{\ast}$ by
 >
 > $$
-> f_{c}^{\ast}(n) = \operatorname{min} \lbrace i \ge 0 : f^{(i)}(N) \le c \rbrace \;,
+> f_{c}^{\ast}(n) = \text{min} \lbrace i \ge 0 : f^{(i)}(N) \le c \rbrace \;,
 > $$
 >
 > which need not be well defined in all cases. In other words, the quantity
-> $f_{c}^{/ast}(n)$ is the minimum number of iterated applications of the
+> $f_{c}^{\ast}(n)$ is the minimum number of iterated applications of the
 > function $f$ required to reduce its argument down to $c$ or less.
 >
 > For each of the functions $f(n)$ and constants $c$ in the table below, give
 > as tight a bound as possible on $f_{c}^{\ast}(n)$. If there is no $i$ such
-> that $f^{(i)}(n) \le c$, write "undefined" as your answer.
+> that $`f^{(i)}(n) \le c`$, write "undefined" as your answer.
 >
 > $$
 > \begin{align}
@@ -346,3 +346,4 @@
 > e. & \sqrt{n} & 2 \\
 > f. & \sqrt{n} & 1 \\
 > g. & n^{1/3} & 2 \\
+> $$
