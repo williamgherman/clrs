@@ -635,7 +635,7 @@ $$
 \begin{align}
 p' &= A[i] + x \cdot p \\
 &= A[i] + x \cdot \sum_{k=0}^{n-(i+1)} A[k + i + 1] \cdot x^k \\
-&= A[i] + \sum_{k=0}^{n-(i+1)} A[k + i + 1] \codt x^{k+1} \\
+&= A[i] + \sum_{k=0}^{n-(i+1)} A[k + i + 1] \cdot x^{k+1} \\
 &= A[i] + \sum_{k=1}^{n-i} A[k + i] \cdot x^k \\
 &= \sum_{k=0}^{n-i} A[k + i] \cdot x^k
 \end{align}
